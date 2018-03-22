@@ -12,5 +12,10 @@ namespace Web
         {
             Clients.All.hello();
         }
+
+        public void Send(string name, string message)
+        {
+            Clients.All.broadCastMessage(name, message);
+        }
     }
 }
