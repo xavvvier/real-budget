@@ -9,6 +9,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using System.Web.Script.Serialization;
+using Resources.Constants;
 
 namespace Resources.Repositories.ObjectManager
 {
@@ -239,6 +240,32 @@ namespace Resources.Repositories.ObjectManager
             return task.Result.Objects;
         }
         #endregion
+
+        public void InsertDocumentView(int DocumentAI, int UserAI, string actionChoice, int? Seconds)
+        {
+            Create(ObjectTypes.ActivityLog, new List<FieldRefValuePair>(){
+                new FieldRefValuePair() {
+                    Field = new FieldRef() { Guid = new Guid(ActivityLogFields.User) },
+                    Value = UserAI
+                },
+                new FieldRefValuePair() {
+                    Field = new FieldRef() { Guid = new Guid(ActivityLogFields.Document) },
+                    Value = new RelativityObjectRef() { ArtifactID = DocumentAI }
+                },
+                new FieldRefValuePair() {
+                    Field = new FieldRef() { Guid = new Guid(ActivityLogFields.DateTime) },
+                    Value = DateTime.Now
+                },
+                new FieldRefValuePair() {
+                    Field = new FieldRef() { Guid = new Guid(ActivityLogFields.Action) },
+                    Value = new ChoiceRef() { Guid = new Guid(actionChoice)}
+                },
+                new FieldRefValuePair() {
+                    Field = new FieldRef() { Guid = new Guid(ActivityLogFields.Seconds) },
+                    Value = Seconds
+                }
+            });
+        }
 
         //PRIVATE
         private ObjectTypeRef GetObjectTypeRef(object ObjectTypeIdentifier)
