@@ -40,6 +40,10 @@
       <HintPath>..\packages\kCura.9.6.25.48\lib\net462\kCura.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="kCura.EventHandler, Version=9.5.350.78, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\kCura.EventHandler.9.5.350.78\lib\net462\kCura.EventHandler.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="kCura.Injection, Version=1.0.8.0, Culture=neutral, PublicKeyToken=318fc9f898ce154d, processorArchitecture=MSIL">
       <HintPath>..\packages\kCura.Injection.9.6.26.25\lib\net462\kCura.Injection.dll</HintPath>
       <Private>True</Private>
@@ -97,6 +101,8 @@
   <ItemGroup>
     <Compile Include="Constants\GlobalConstants.cs" />
     <Compile Include="DTOs\Repositories\ObjectManagerDTOs.cs" />
+    <Compile Include="EventHandlers\BaseEventHandler.cs" />
+    <Compile Include="EventHandlers\Document\DocumentPreSave.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\IDataRepository.cs" />
     <Compile Include="Repositories\Logging\LoggingRepository.cs" />
