@@ -1,4 +1,5 @@
 ﻿using kCura.EventHandler;
+using Resources.Constants;
 using Resources.Repositories;
 using Resources.Repositories.ObjectManager;
 using System;
@@ -9,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Resources.EventHandlers.Document
 {
-    class DocumentPreSave : PreSaveEventHandler
+    class DocumentPreload : PreLoadEventHandler
     {
         public override FieldCollection RequiredFields
         {
@@ -18,12 +19,13 @@ namespace Resources.EventHandlers.Document
                 return new FieldCollection();
             }
         }
+
         public override Response Execute()
         {
             Response response = new Response { Success = true };
             try
             {
-                
+                _Repo.InsertDocumentView(this.ActiveArtifact.ArtifactID, this.Helper.GetAuthenticationManager().UserInfo.ArtifactID, ActionChoices.View, null);
             }
             catch (Exception ex)
             {

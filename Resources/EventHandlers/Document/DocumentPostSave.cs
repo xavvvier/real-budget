@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Resources.EventHandlers.Document
 {
-    class DocumentPreSave : PreSaveEventHandler
+    public class DocumentPostSave : PostSaveEventHandler
     {
         public override FieldCollection RequiredFields
         {
@@ -18,12 +18,13 @@ namespace Resources.EventHandlers.Document
                 return new FieldCollection();
             }
         }
+
         public override Response Execute()
         {
             Response response = new Response { Success = true };
             try
             {
-                
+
             }
             catch (Exception ex)
             {
