@@ -1,7 +1,7 @@
 ﻿using Microsoft.Owin;
 using Owin;
 
-[assembly: OwinStartup(typeof(Web.Startup))]
+//[assembly: OwinStartup(typeof(Web.Startup))]
 
 namespace Web
 {
