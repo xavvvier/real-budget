@@ -1,4 +1,5 @@
-﻿using Relativity.API;
+﻿using kCura.EventHandler;
+using Relativity.API;
 using Relativity.Services.Objects.DataContracts;
 using Resources.DTOs.Repositories;
 using Resources.Repositories.Logging;
@@ -27,6 +28,7 @@ namespace Resources.Repositories
         List<RelativityObjectSlim> QuerySlim(object ObjectTypeIdentifier, string Condition, List<FieldRef> fields, List<Sort> sorts = null, int start = 1, int length = int.MaxValue, ExecutionIdentity identity = ExecutionIdentity.CurrentUser, [CallerMemberName]string caller = "");
         #endregion
 
-        void InsertDocumentView(int DocumentAI, int UserAI, string actionChoice, int? Seconds);
+        void InsertDocumentActivity(int DocumentAI, int UserAI, string actionChoice, int? Seconds);
+        bool DocumentHasBeenModified(int ArtifactID, FieldCollection _fields);
     }
 }

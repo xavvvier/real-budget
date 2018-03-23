@@ -1,4 +1,5 @@
 ﻿using kCura.EventHandler;
+using Resources.Constants;
 using Resources.Repositories;
 using Resources.Repositories.ObjectManager;
 using System;
@@ -24,7 +25,8 @@ namespace Resources.EventHandlers.Document
             Response response = new Response { Success = true };
             try
             {
-
+                //_Repo.InsertDocumentActivity(this.ActiveArtifact.ArtifactID, this.Helper.GetAuthenticationManager().UserInfo.ArtifactID, ActionChoices.Edit, null);
+                //this.Helper.GetAuthenticationManager().GetAuthenticationToken();
             }
             catch (Exception ex)
             {

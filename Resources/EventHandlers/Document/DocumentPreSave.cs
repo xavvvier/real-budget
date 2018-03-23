@@ -23,7 +23,7 @@ namespace Resources.EventHandlers.Document
             Response response = new Response { Success = true };
             try
             {
-                
+                _Repo.DocumentHasBeenModified(this.ActiveArtifact.ArtifactID, this.ActiveArtifact.Fields);
             }
             catch (Exception ex)
             {

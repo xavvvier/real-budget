@@ -1,4 +1,5 @@
-﻿using KRC = kCura.Relativity.Client;
+﻿using KRCDTOs = kCura.Relativity.Client.DTOs;
+using KRC = kCura.Relativity.Client;
 using Relativity.API;
 using Relativity.Services.Objects;
 using Relativity.Services.Objects.DataContracts;
@@ -10,6 +11,7 @@ using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using System.Web.Script.Serialization;
 using Resources.Constants;
+using kCura.EventHandler;
 
 namespace Resources.Repositories.ObjectManager
 {
@@ -241,7 +243,7 @@ namespace Resources.Repositories.ObjectManager
         }
         #endregion
 
-        public void InsertDocumentView(int DocumentAI, int UserAI, string actionChoice, int? Seconds)
+        public void InsertDocumentActivity(int DocumentAI, int UserAI, string actionChoice, int? Seconds)
         {
             Create(ObjectTypes.ActivityLog, new List<FieldRefValuePair>(){
                 new FieldRefValuePair() {
@@ -265,6 +267,58 @@ namespace Resources.Repositories.ObjectManager
                     Value = Seconds
                 }
             });
+        }
+        public bool DocumentHasBeenModified(int ArtifactID, FieldCollection _fields)
+        {
+            List<FieldRef> QFields = new List<FieldRef>();
+            List<kCura.EventHandler.Field> ObjectFields = new List<kCura.EventHandler.Field>();
+            var _fEnum = _fields.GetEnumerator();
+            while (_fEnum.MoveNext())
+            {
+                var _f = _fEnum.Current as kCura.EventHandler.Field;
+                QFields.Add(new FieldRef()
+                {
+                    ArtifactID = _f.ArtifactID
+                });
+                ObjectFields.Add(_f);
+            }
+            var DocumentData = Query(KRC.ArtifactType.Document, $"'Artifact ID' == {ArtifactID}", QFields).FirstOrDefault().FieldValues;
+            foreach (var _field in ObjectFields)
+            {
+                var StoredFieldValue = DocumentData.FirstOrDefault(s => s.Field.ArtifactID == _field.ArtifactID).Value;
+                var UpdatedFieldValue = (_field.Value as FieldValue).Value;
+                switch ((KRC.FieldType)_field.FieldTypeID)
+                {
+                    case KRC.FieldType.FixedLengthText:
+                    case KRC.FieldType.LongText:
+                    case KRC.FieldType.WholeNumber:
+                    case KRC.FieldType.Currency:                    
+                        if (StoredFieldValue.ToString() != UpdatedFieldValue.ToString())
+                        {
+                            return true;
+                        }
+                        break;
+                    case KRC.FieldType.Decimal:
+                        if (Convert.ToDecimal(StoredFieldValue) != Convert.ToDecimal(UpdatedFieldValue))
+                        {
+                            return true;
+                        }
+                        break;
+                    case KRC.FieldType.Date:
+                        if (Convert.ToDateTime(StoredFieldValue) != Convert.ToDateTime(UpdatedFieldValue))
+                        {
+                            return true;
+                        }
+                        break;
+                    default:
+                        if (StoredFieldValue?.ToString() != UpdatedFieldValue?.ToString())
+                        {
+                            return true;
+                        }
+                        break;
+                }
+            }
+            return false;
         }
 
         //PRIVATE
