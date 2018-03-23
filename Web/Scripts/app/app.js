@@ -1,7 +1,7 @@
 ﻿(function () {
     'use strict';
 
-    var RBApp = angular.module('RBApp', []);
+    var RBApp = angular.module('RBApp', ['ngOdometer']);
 
 
     RBApp.controller('RBAppCtrl', ['$scope', '$timeout', '$http', function RBAppCtrl($scope, $timeout, $http) {
@@ -71,7 +71,7 @@
     function categoryIndex(ArtifactId) {
         var index;
         for (var i = 0; i < vm.workspaces.length; ++i) {
-            if (vm.workspaces[i].WorkspaceArtifactId == ArtifactId) {
+            if (vm.workspaces[i].WorkspaceArtifactId === ArtifactId) {
                 index = i;
                 break;
             }
