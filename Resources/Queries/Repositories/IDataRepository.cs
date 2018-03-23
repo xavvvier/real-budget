@@ -30,6 +30,6 @@ namespace Resources.Repositories
 
         void InsertDocumentActivity(int DocumentAI, int UserAI, string actionChoice, int? Seconds);
         bool DocumentHasBeenModified(int ArtifactID, FieldCollection _fields);
-        int GetSecondsSinceLastView(int ArtifactID);
+        int GetSecondsSinceLastView(int ArtifactID, int UserArtifactID);
     }
 }
