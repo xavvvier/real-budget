@@ -137,13 +137,13 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Sql.resx</DependentUpon>
     </Compile>
-    <Compile Include="Repositories\IDataRepository.cs" />
-    <Compile Include="Repositories\ISqlRepository.cs" />
-    <Compile Include="Repositories\Logging\LoggingRepository.cs" />
-    <Compile Include="Repositories\Logging\ILoggingRepository.cs" />
-    <Compile Include="Repositories\ObjectManager\BaseRepository.cs" />
-    <Compile Include="Repositories\ObjectManager\ObjectManagerRepository.cs" />
-    <Compile Include="Repositories\Sql\SqlRepository.cs" />
+    <Compile Include="Queries\Repositories\IDataRepository.cs" />
+    <Compile Include="Queries\Repositories\ISqlRepository.cs" />
+    <Compile Include="Queries\Repositories\Logging\LoggingRepository.cs" />
+    <Compile Include="Queries\Repositories\Logging\ILoggingRepository.cs" />
+    <Compile Include="Queries\Repositories\ObjectManager\BaseRepository.cs" />
+    <Compile Include="Queries\Repositories\ObjectManager\ObjectManagerRepository.cs" />
+    <Compile Include="Queries\Repositories\Sql\SqlRepository.cs" />
     <Compile Include="WebAuthenticationHelper.cs" />
   </ItemGroup>
   <ItemGroup>

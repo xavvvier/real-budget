@@ -24,7 +24,7 @@ namespace Resources.EventHandlers.Document
             Response response = new Response { Success = true };
             try
             {
-                int? Seconds = _Repo.GetSecondsSinceLastView(this.ActiveArtifact.ArtifactID);
+                int? Seconds = _Repo.GetSecondsSinceLastView(this.ActiveArtifact.ArtifactID, this.Helper.GetAuthenticationManager().UserInfo.ArtifactID);
                 string Action = _Repo.DocumentHasBeenModified(this.ActiveArtifact.ArtifactID, this.ActiveArtifact.Fields) ? ActionChoices.Edit : ActionChoices.View;
                 _Repo.InsertDocumentActivity(this.ActiveArtifact.ArtifactID, this.Helper.GetAuthenticationManager().UserInfo.ArtifactID, Action, Seconds);
             }

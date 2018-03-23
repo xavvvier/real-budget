@@ -36,27 +36,55 @@ namespace Resources.Repositories.Sql
             var workspacesWithApp = WorkspacesWithAppInstalled();
             foreach (var workspace in workspacesWithApp)
             {
-                var table = Context(workspace.ArtifactID).ExecuteSqlStatementAsDataTable(Queries.Sql.MetricsByWorkspace,
-                    new SqlParameter[]
-                    {
-                        new SqlParameter("Date1", start),
-                        new SqlParameter("Date2", end)
-                    });
-                var workspaceInfo = new WorkspaceInfo
+                WorkspaceInfo workspaceInfo = ReadWorkspaceInfo(workspace, start, end);
+                infoList.Add(workspaceInfo);
+            }
+            return infoList;
+        }
+
+        public WorkspaceInfo ReadWorkspaceInfo(Artifact workspace, DateTime start, DateTime end)
+        {
+            var table = Context(workspace.ArtifactID).ExecuteSqlStatementAsDataTable(Queries.Sql.MetricsByWorkspace,
+                new SqlParameter[]
                 {
-                    WorkspaceArtifactId = workspace.ArtifactID,
-                    WorkspaceName = workspace.Name,
-                };
-                workspaceInfo.User = table.AsEnumerable().Select(row => new User
+                    new SqlParameter("Date1", start),
+                    new SqlParameter("Date2", end)
+                });
+            var workspaceInfo = new WorkspaceInfo
+            {
+                WorkspaceArtifactId = workspace.ArtifactID,
+                WorkspaceName = workspace.Name,
+            };
+            workspaceInfo.User = table.AsEnumerable().Select(row => {
+                int seconds = (int)row["Seconds"];
+                var user = new User
                 {
                     EditsHour = (int)row["Edits"],
                     EditsHourBadge = (int)row["DistinctEdits"],
                     ViewsHour = (int)row["Views"],
                     ViewsHourBadge = (int)row["DistinctViews"],
-                }).ToList();
-            }
-            return infoList;
+                    UserName = row["UserName"].ToString(),
+                    UserArtifactId = (int)row["UserID"],
+                    Seconds = seconds
+                };
+                if (seconds > 0)
+                {
+                    double hours = seconds / 3600.0;
+                    user.EditsHour = (int)(user.EditsHour *1.0 / hours);
+                    user.EditsHourBadge = (int)(user.EditsHour / hours);
+                    user.ViewsHour = (int)(user.ViewsHour / hours);
+                    user.ViewsHourBadge = (int)(user.ViewsHourBadge / hours);
+                }
+                return user;
+            }).ToList();
+            workspaceInfo.Seconds = workspaceInfo.User.Sum(u => u.Seconds);
+            workspaceInfo.EditsHour = workspaceInfo.User.Sum(u => u.EditsHour);
+            workspaceInfo.EditsHourBadge = workspaceInfo.User.Sum(u => u.EditsHourBadge);
+            workspaceInfo.ViewsHour = workspaceInfo.User.Sum(u => u.ViewsHour);
+            workspaceInfo.ViewsHourBadge = workspaceInfo.User.Sum(u => u.ViewsHourBadge);
+            return workspaceInfo;
         }
+
 
         private IEnumerable<Artifact> WorkspacesWithAppInstalled()
         {
