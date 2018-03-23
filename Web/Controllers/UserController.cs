@@ -1,4 +1,8 @@
 ﻿using Relativity.CustomPages;
+using Resources.Model;
+using Resources.Repositories;
+using Resources.Repositories.Sql;
+using System.Collections.Generic;
 using System.Web.Http;
 
 namespace Web.Controllers
@@ -12,11 +16,25 @@ namespace Web.Controllers
                 return ConnectionHelper.Helper().GetDBContext(-1);
             }
         }
+        private ISqlRepository Repository
+        {
+            get
+            {
+                return new SqlRepository(Context);
+            }
+        }
 
         [HttpGet]
-        public void GetAll()
+        public IHttpActionResult GetAll()
         {
-            //return Context.EI
+            return Ok(Repository.GetAllUserPrice());
+        }
+        
+        [HttpPost]
+        public IHttpActionResult UpdatePrices(List<UserPrice> users)
+        {
+            Repository.UpdateUserPrice(users);
+            return Ok();
         }
     }
 }

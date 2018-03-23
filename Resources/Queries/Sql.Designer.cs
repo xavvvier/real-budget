@@ -123,5 +123,24 @@ namespace Resources.Queries {
                 return ResourceManager.GetString("GetAll", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 
+        ///IF EXISTS (SELECT TOP 1 1 FROM eddsdbo.UserPrice WHERE UserID = @UserId)
+        ///BEGIN
+        ///    UPDATE eddsdbo.UserPrice SET PricePerHour = @PricePerHour WHERE UserID = @UserId
+        ///END
+        ///ELSE
+        ///BEGIN
+        ///   INSERT eddsdbo.UserPrice(UserID, PricePerHour) 
+        ///   VALUES (@UserId, @PricePerHour)
+        ///END
+        ///.
+        /// </summary>
+        internal static string UpdateUserPrice {
+            get {
+                return ResourceManager.GetString("UpdateUserPrice", resourceCulture);
+            }
+        }
     }
 }

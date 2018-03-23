@@ -33,7 +33,6 @@ namespace Web
 
             bundles.Add(new ScriptBundle("~/bundles/RBApp").Include(
                 "~/Scripts/jquery-1.10.2.min.js",
-                      "~/Scripts/Common.js",
                      "~/Scripts/app/app.js"
                      ));
 

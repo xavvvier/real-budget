@@ -8,7 +8,9 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     @Scripts.Render("~/bundles/modernizr")
     @Scripts.Render("~/bundles/jquery")
-
+    <script type="text/javascript">
+        var baseUrl = @Html.Raw(Json.Encode(Url.Content("~")));
+    </script>
 </head>
 <body ng-app="RBApp" ng-controller="RBAppCtrl as vm">
 

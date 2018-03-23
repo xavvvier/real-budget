@@ -4,21 +4,38 @@
     var RBApp = angular.module('RBApp', []);
 
 
-    RBApp.controller('RBAppCtrl', function RBAppCtrl($scope, $timeout, $http) {
+    RBApp.controller('RBAppCtrl', ['$scope', '$timeout', '$http',function RBAppCtrl($scope, $timeout, $http) {
         var vm = this;
         vm.cards = [];
         vm.workspaces = {};
 
-        $http.post(GetWorkspacesSummaryURL)
+        $http.post(baseUrl + 'Home/GetWorkspacesData')
             .then(function (response) {
                 vm.workspaces = response.data;
             });
 
-        $http.post(GetSummaryURL)
+        $http.post(baseUrl + 'Home/GetSummary')
             .then(function (response) {
                 vm.cards = response.data;
             });
 
+        function userTests() {
+            $http.get(baseUrl + 'api/User/GetAll')
+                .then(function (response) {
+                    console.log(response);
+                });
+            var usersToUpdate = [
+                {
+                    ArtifactID: 9,
+                    PricePerHour: new Date().getSeconds()
+                }
+            ];
+            $http.post(baseUrl + 'api/User/UpdatePrices', usersToUpdate)
+                .then(function (response) {
+                    console.log(response);
+                });
+        }
+        userTests();
         vm.hub = $.connection.mainHub;
         
         vm.hub.client.broadCastMessage = function (message) {
@@ -35,5 +52,5 @@
         }
 
         $.connection.hub.start();
-    });
+    }]);
 })();

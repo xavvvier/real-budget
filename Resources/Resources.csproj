@@ -139,6 +139,7 @@
     <Compile Include="Repositories\Logging\ILoggingRepository.cs" />
     <Compile Include="Repositories\ObjectManager\BaseRepository.cs" />
     <Compile Include="Repositories\ObjectManager\ObjectManagerRepository.cs" />
+    <Compile Include="Repositories\Sql\SqlRepository.cs" />
     <Compile Include="WebAuthenticationHelper.cs" />
   </ItemGroup>
   <ItemGroup>
