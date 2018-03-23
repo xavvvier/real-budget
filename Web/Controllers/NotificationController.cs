@@ -19,11 +19,5 @@ namespace Web.Controllers
         {
             _instance.Value.All.broadCastMessage(workspace);
         }
-        [HttpPost]
-
-        public void SummaryNotification(WorkspaceInfo workspace)
-        {
-            _instance.Value.All.instanceSummary(workspace);
-        }
     }
 }
