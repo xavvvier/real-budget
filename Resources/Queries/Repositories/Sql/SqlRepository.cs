@@ -66,7 +66,8 @@ namespace Resources.Repositories.Sql
                     ViewsHourBadge = (int)row["DistinctViews"],
                     UserName = row["UserName"].ToString(),
                     UserArtifactId = (int)row["UserID"],
-                    Seconds = seconds
+                    Seconds = seconds,
+                    AverageTime = (int)row["Average"]
                 };
                 var userPrice = users.FirstOrDefault(u => u.ArtifactID == user.UserArtifactId)?.PricePerHour ?? 0;
                 if (seconds > 0)
@@ -77,7 +78,6 @@ namespace Resources.Repositories.Sql
                     user.ViewsHour = (int)(user.ViewsHour / hours);
                     user.ViewsHourBadge = (int)(user.ViewsHourBadge / hours);
                     user.CostDay = (int)(userPrice * (decimal)hours);
-                    //user.AverageTime = 
                 }
                 return user;
             }).ToList();
@@ -87,6 +87,7 @@ namespace Resources.Repositories.Sql
             workspaceInfo.ViewsHour = workspaceInfo.User.Sum(u => u.ViewsHour);
             workspaceInfo.ViewsHourBadge = workspaceInfo.User.Sum(u => u.ViewsHourBadge);
             workspaceInfo.CostDay = workspaceInfo.User.Sum(u => u.CostDay);
+            workspaceInfo.AverageTime = workspaceInfo.User.Sum(u => u.AverageTime);
             return workspaceInfo;
         }
 
