@@ -292,7 +292,7 @@ namespace Resources.Repositories.ObjectManager
                     case KRC.FieldType.FixedLengthText:
                     case KRC.FieldType.LongText:
                     case KRC.FieldType.WholeNumber:
-                        if (StoredFieldValue.ToString() != UpdatedFieldValue.ToString())
+                        if (StoredFieldValue?.ToString() != UpdatedFieldValue?.ToString())
                         {
                             return true;
                         }
