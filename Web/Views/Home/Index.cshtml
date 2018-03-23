@@ -2,30 +2,217 @@
     ViewBag.Title = "Home Page";
 }
 
-<div class="jumbotron">
-    <h1>ASP.NET</h1>
-    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-    <p><a href="http://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
+
+<div class="rb-padding">
+    <div class="text-right">
+        <a href="#" class="align-top" data-toggle="modal" data-target=".modal-settings"><span class="material-icons">settings</span>Settings</a>
+    </div>
+    <div class="card border-light mb-3">
+        <h2>Title</h2>
+        <div class="card-body">
+            <div class="card-deck">
+                <div class="col-xl-3 col-xs-1 rb-padding-top">
+                    <div class="card border-primary">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <span class="material-icons primary rb-icon">attach_money</span>
+                                </div>
+                                <div class="col-md-9 text-center">
+                                    <div id="odometer" class="odometer rb-floating-text text-secondary">0</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer bg-primary text-light">Cost / Day</div>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-xs-1 rb-padding-top">
+                    <div class="card border-success">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <span class="material-icons success rb-icon">remove_red_eye</span>
+                                </div>
+                                <div class="col-md-9 text-center">
+                                    <div class="row">
+                                        <div class="col-md-6 text-center">
+                                            <div id="odometer1" class="odometer rb-floating-text text-secondary">0</div>
+                                        </div>
+                                        <div class="col-md-6 text-right">
+                                            Distinct:
+                                            <span id="odometerBadge" class="odometer badge badge-success" title="Distinct">0</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer bg-success  text-light">Views / Hour</div>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-xs-1 rb-padding-top">
+                    <div class="card border-warning">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <span class="material-icons warning rb-icon">access_time</span>
+                                </div>
+                                <div class="col-md-9 text-center">
+                                    <div id="odometer2" class="odometer rb-floating-text text-secondary">0</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer bg-warning text-light">Average review / Hour</div>
+                    </div>
+                </div>
+                <div class="col-xl-3 col-xs-1 rb-padding-top">
+                    <div class="card border-danger">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-3">
+                                    <span class="material-icons danger rb-icon">mode_edit</span>
+                                </div>
+                                <div class="col-md-9">
+                                    <div class="row">
+                                        <div class="col-md-6 text-center">
+                                            <div id="odometer3" class="odometer rb-floating-text text-secondary">0</div>
+                                        </div>
+                                        <div class="col-md-6 text-right">
+                                            Distinct:
+                                            <span id="odometerBadge1" class="odometer badge badge-danger" title="Distinct">0</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-footer bg-danger text-light">Edits / Hour</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="rb-padding col col-lg-12">
+        <table class="table table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th class="text-center" scope="col">#</th>
+                    <th scope="col">Workspace</th>
+                    <th scope="col">Cost / Day</th>
+                    <th scope="col">Views / Hour</th>
+                    <th scope="col">Average / Review</th>
+                    <th scope="col">Edits / Hour</th>
+                    <th scope="col"># of Users</th>
+                    <th class="text-center" scope="col">Details</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr data-toggle="collapse" data-target=".order1">
+                    <td class="text-center">1</td>
+                    <td>2</td>
+                    <td>3</td>
+                    <td>4</td>
+                    <td>5</td>
+                    <td>6</td>
+                    <td>7</td>
+                    <td class="text-center">
+                        <a href="#">
+                            <a href="#" class="align-top" data-toggle="modal" data-target=".bd-example-modal-lg">
+                                <span class="material-icons">more_horiz</span>
+                            </a>
+                        </a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 </div>
 
-<div class="row">
-    <div class="col-md-4">
-        <h2>Getting started</h2>
-        <p>
-            ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-            enables a clean separation of concerns and gives you full control over markup
-            for enjoyable, agile development.
-        </p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
+
+
+    <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Workspace Details</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <table class="table table-bordered table-hover">
+                        <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">User Name</th>
+                                <th scope="col">Cost / Day</th>
+                                <th scope="col">Views / Hour</th>
+                                <th scope="col">Average / Review</th>
+                                <th scope="col">Edits / Hour</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>Camilo Molina</td>
+                                <td class="text-success">$10,00</td>
+                                <td>5</td>
+                                <td>20</td>
+                                <td>1</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
     </div>
-    <div class="col-md-4">
-        <h2>Get more libraries</h2>
-        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
+
+    <div class="modal fade modal-settings" tabindex="-1" role="dialog" aria-labelledby="modal-settings" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Settings</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <table class="table table-bordered table-hover">
+                        <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">User Name</th>
+                                <th scope="col">Price per Hour</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>Camilo Molina</td>
+                                <td><input type="number" class="form-control mb-2"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
     </div>
-    <div class="col-md-4">
-        <h2>Web Hosting</h2>
-        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
-    </div>
-</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
