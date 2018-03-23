@@ -3,7 +3,7 @@ using Microsoft.AspNet.SignalR.Hubs;
 using System;
 using System.Collections.Generic;
 using System.Web.Http;
-using Web.Models;
+using Resources.Models;
 
 namespace Web.Controllers
 {
@@ -15,13 +15,13 @@ namespace Web.Controllers
             GlobalHost.ConnectionManager.GetHubContext<MainHub>().Clients);
 
         [HttpPost]
-        public void WorkspacesNotification(List<Workspace> workspace)
+        public void WorkspacesNotification(List<WorkspaceInfo> workspace)
         {
             _instance.Value.All.broadCastMessage(workspace);
         }
         [HttpPost]
 
-        public void SummaryNotification(Workspace workspace)
+        public void SummaryNotification(WorkspaceInfo workspace)
         {
             _instance.Value.All.instanceSummary(workspace);
         }

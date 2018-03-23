@@ -125,6 +125,26 @@ namespace Resources.Queries {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to DECLARE @CodeTypeID int
+        ///select top 1 @CodeTypeID = CodeTypeID  from 
+        ///eddsdbo.ArtifactGuid WITH(NOLOCK)
+        ///JOIN eddsdbo.Field WITH(NOLOCK) ON ArtifactGuid.ArtifactID = Field.ArtifactID
+        ///where ArtifactGuid = &apos;75865E6D-E5DF-46BC-AD26-1479B87EFE13&apos;
+        ///
+        ///DECLARE @SQL NVARCHAR(MAX) = N&apos;
+        ///;WITH CTE AS(
+        ///	select [User], AL.Document, ArtifactGuid, Seconds
+        ///	from eddsdbo.ActivityLog AL WITH(NOLOCK)
+        ///	JOIN ZCodeArtifact_&apos; + CAST(@CodeTypeID as nvarchar(20)) + N&apos; Z WITH(NOLOCK) ON Z.AssociatedArtifactID = AL.ArtifactID
+        /// [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string MetricsByWorkspace {
+            get {
+                return ResourceManager.GetString("MetricsByWorkspace", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 
         ///IF EXISTS (SELECT TOP 1 1 FROM eddsdbo.UserPrice WHERE UserID = @UserId)
         ///BEGIN
@@ -140,6 +160,26 @@ namespace Resources.Queries {
         internal static string UpdateUserPrice {
             get {
                 return ResourceManager.GetString("UpdateUserPrice", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to DECLARE @CodeTypeID int
+        ///select top 1 @CodeTypeID = CodeTypeID  from 
+        ///eddsdbo.ArtifactGuid WITH(NOLOCK)
+        ///JOIN eddsdbo.Field WITH(NOLOCK) ON ArtifactGuid.ArtifactID = Field.ArtifactID
+        ///where ArtifactGuid = &apos;75865E6D-E5DF-46BC-AD26-1479B87EFE13&apos;
+        ///
+        ///DECLARE @SQL NVARCHAR(MAX) = N&apos;
+        ///;WITH CTE AS(
+        ///	select [User], AL.Document, ArtifactGuid, Seconds
+        ///	from eddsdbo.ActivityLog AL WITH(NOLOCK)
+        ///	JOIN ZCodeArtifact_&apos; + CAST(@CodeTypeID as nvarchar(20)) + N&apos; Z WITH(NOLOCK) ON Z.AssociatedArtifactID = AL.ArtifactID
+        /// [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string WorkspacesWithApp {
+            get {
+                return ResourceManager.GetString("WorkspacesWithApp", resourceCulture);
             }
         }
     }

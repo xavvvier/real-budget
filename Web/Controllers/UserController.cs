@@ -20,7 +20,7 @@ namespace Web.Controllers
         {
             get
             {
-                return new SqlRepository(Context);
+                return new SqlRepository(ConnectionHelper.Helper().GetDBContext);
             }
         }
 

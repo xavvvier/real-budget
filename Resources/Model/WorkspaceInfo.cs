@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System.Collections.Generic;
 
-namespace Web.Models
+namespace Resources.Models
 {
-    public class Workspace : Notification
+    public class WorkspaceInfo : Notification
     {
         public int WorkspaceArtifactId { get; set; }
         public string WorkspaceName { get; set; }

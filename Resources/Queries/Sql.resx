@@ -127,7 +127,13 @@
   <data name="GetAll" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>userprice\getall.sql;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
   </data>
+  <data name="MetricsByWorkspace" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>report\metricsbyworkspace.sql;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
   <data name="UpdateUserPrice" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>userprice\updateuserprice.sql;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
+  </data>
+  <data name="WorkspacesWithApp" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>report\workspaceswithapp.sql;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
   </data>
 </root>
