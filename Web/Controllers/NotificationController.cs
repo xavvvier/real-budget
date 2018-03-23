@@ -19,5 +19,10 @@ namespace Web.Controllers
         {
             _instance.Value.All.broadCastMessage(workspace);
         }
+        [HttpPost]
+        public void TestMethod(int param)
+        {
+            var x = param.ToString();
+        }
     }
 }

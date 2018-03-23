@@ -49,7 +49,7 @@ namespace Resources.EventHandlers.Document
             };
             var auth = new NSerio.Relativity.WebAuthentication.Core.Authentication(webAuthenticationHelper);
             var custompageGuid = GlobalConstants.CUSTOM_PAGE_GUID.ToString();
-            IRestRequest request = new RestRequest($"Relativity/CustomPages/{custompageGuid}/api/Notification");
+            IRestRequest request = new RestRequest($"Relativity/CustomPages/{custompageGuid}/api/Notification/WorkspacesNotification");
             request.Method = Method.POST;
             JavaScriptSerializer coder = new JavaScriptSerializer();
             var lstWSInfo = SqlRepository.GetWorkspacesInfo(DateTime.Today, DateTime.Today.AddDays(1));
