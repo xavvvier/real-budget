@@ -25,7 +25,7 @@ namespace Resources.EventHandlers.Document
             Response response = new Response { Success = true };
             try
             {
-                _Repo.InsertDocumentView(this.ActiveArtifact.ArtifactID, this.Helper.GetAuthenticationManager().UserInfo.ArtifactID, ActionChoices.View, null);
+               // _Repo.InsertDocumentView(this.ActiveArtifact.ArtifactID, this.Helper.GetAuthenticationManager().UserInfo.ArtifactID, ActionChoices.View, null);
             }
             catch (Exception ex)
             {

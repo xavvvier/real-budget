@@ -1,11 +1,10 @@
 ﻿using kCura.EventHandler;
+using NSerio.Relativity.WebAuthentication;
+using Relativity.API;
 using Resources.Repositories;
 using Resources.Repositories.ObjectManager;
+using RestSharp;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Resources.EventHandlers.Document
 {
@@ -24,7 +23,7 @@ namespace Resources.EventHandlers.Document
             Response response = new Response { Success = true };
             try
             {
-
+                InvokeWebService();
             }
             catch (Exception ex)
             {
@@ -35,6 +34,34 @@ namespace Resources.EventHandlers.Document
             }
             return response;
         }
+
+        private void InvokeWebService()
+        {
+            var myUri = this.Helper.GetUrlHelper().GetApplicationURL(new Guid("C4EF15B9-516F-4C2D-9566-EA1FC2A617BD"));
+            IWebAuthenticationHelper webAuthenticationHelper = new WebAuthenticationHelper
+            {
+                GetDBContext = GetCaseDBContext,
+                RelativityUrl = myUri,
+                UserArtifactID = 777,
+            };
+            var auth = new NSerio.Relativity.WebAuthentication.Core.Authentication(webAuthenticationHelper);
+            IRestRequest request = new RestRequest("Relativity/CustomPages/c4ef15b9-516f-4c2d-9566-ea1fc2a617bd/api/Notification");
+            request.Method = Method.POST;
+            string jsonToSend = @"{
+                    ""UserName"": ""Relativity Admin"",
+                    ""Action"": ""Edit"",
+                    ""TotalEdits"": 4
+                }";
+            request.AddParameter("application/json; charset=utf-8", jsonToSend, ParameterType.RequestBody);
+            request.RequestFormat = DataFormat.Json;
+            var rsp = auth.Request(request);
+        }
+
+        protected IDBContext GetCaseDBContext(int appID)
+        {
+            return this.Helper.GetDBContext(appID);
+        }
+
         protected IDataRepository _Repo
         {
             get
