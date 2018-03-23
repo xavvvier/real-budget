@@ -61,23 +61,66 @@ namespace Resources.Queries {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to using System;
-        ///using System.Collections.Generic;
-        ///using System.Linq;
-        ///using System.Text;
-        ///using System.Threading.Tasks;
+        ///   Looks up a localized string similar to DECLARE @TABEXISTS INT = 0
         ///
-        ///namespace Resources.Queries
-        ///{
-        ///    class CreateInstanceLevelTab
-        ///    {
-        ///    }
-        ///}
-        ///.
+        ///declare @WsID INT 
+        ///declare @ArtifactID INT 
+        ///declare @ArtifactIDChild INT
+        ///
+        ///SELECT @TABEXISTS = COUNT(*)
+        ///FROM [EDDSDBO].[Tab]  WITH (NOLOCK)
+        ///WHERE [Name] = &apos;Real Budget&apos;
+        ///
+        ///IF (@TABEXISTS = 0)
+        ///BEGIN
+        ///	SET @WsID = (Select TOP 1 ArtifactID From [EDDSDBO].[Artifact](nolock)  where ArtifactTypeID = 1)
+        ///
+        ///	INSERT INTO EDDSDBO.Artifact (ArtifactTypeID, ParentArtifactID, AccessControlListID, AccessControlListIsInherited, CreatedOn, LastModifiedOn, LastModifiedBy, CreatedBy,
+        ///	Con [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string CreateInstanceLevelTab {
             get {
                 return ResourceManager.GetString("CreateInstanceLevelTab", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 
+        ///IF OBJECT_ID(&apos;[eddsdbo].[UserPrice]&apos;) IS NULL
+        ///BEGIN
+        ///	CREATE TABLE [eddsdbo].[UserPrice](
+        ///		[UserID] [int] NOT NULL,
+        ///		[PricePerHour] [money] NOT NULL,
+        ///	 CONSTRAINT [PK_UserPrice] PRIMARY KEY CLUSTERED 
+        ///	(
+        ///		[UserID] ASC
+        ///	)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+        ///	) ON [PRIMARY]
+        ///END
+        ///
+        ///.
+        /// </summary>
+        internal static string CreateUserPriceTable {
+            get {
+                return ResourceManager.GetString("CreateUserPriceTable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 
+        ///declare @GlobalUserPrice money
+        ///SELECT TOP 1 @GlobalUserPrice = TRY_CAST(Value AS money) 
+        ///FROM eddsdbo.InstanceSetting WITH (NOLOCK)
+        ///WHERE Name=&apos;DefaultUserPrice&apos; and Section = &apos;RealBudget&apos;
+        ///
+        ///SELECT EU.ArtifactID, EU.FullName as UserName, COALESCE(UP.PricePerHour, @GlobalUserPrice, 0) as PricePerHour
+        ///FROM ExtendedUser EU WITH (NOLOCK)
+        ///LEFT JOIN eddsdbo.UserPrice UP WITH (NOLOCK) ON EU.ArtifactID = UP.UserID
+        ///.
+        /// </summary>
+        internal static string GetAll {
+            get {
+                return ResourceManager.GetString("GetAll", resourceCulture);
             }
         }
     }

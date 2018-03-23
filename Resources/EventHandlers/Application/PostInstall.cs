@@ -1,11 +1,7 @@
 ﻿using kCura.EventHandler;
 using kCura.EventHandler.CustomAttributes;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Resources.EventHandlers.Application
 {
@@ -20,6 +16,7 @@ namespace Resources.EventHandlers.Application
             {
                 var context = Helper.GetDBContext(-1);
                 context.ExecuteNonQuerySQLStatement(Queries.Sql.CreateInstanceLevelTab);
+                context.ExecuteNonQuerySQLStatement(Queries.Sql.CreateUserPriceTable);
                 response.Success = true;
             }
             catch (Exception ex)
