@@ -1,0 +1,56 @@
+﻿.rb-padding {
+    padding: 3%;
+}
+
+.rb-padding-top {
+    padding-top: 1%;
+}
+
+.rb-card {
+    width: 22rem;
+}
+
+.rb-icon {
+    font-size: 300%;
+}
+
+.rb-floating-text {
+    font-size: 300%;
+}
+
+.rb-card-title {
+    font-size: 30px;
+    text-align: center;
+}
+
+.rb-card-deck {
+    margin-left: 60px;
+}
+
+.rb-p {
+    font-size: -10px;
+}
+
+.material-icons.primary {
+    color: #007BFF;
+}
+
+.material-icons.secondary {
+    color: #6C757D;
+}
+
+.material-icons.success {
+    color: #28A745;
+}
+
+.material-icons.info {
+    color: #17A2B8;
+}
+
+.material-icons.warning {
+    color: #FFC107;
+}
+
+.material-icons.danger {
+    color: #DC3545;
+}
