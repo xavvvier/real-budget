@@ -11,7 +11,7 @@ using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using System.Web.Script.Serialization;
 using Resources.Constants;
-using kCura.EventHandler;
+using KEH = kCura.EventHandler;
 
 namespace Resources.Repositories.ObjectManager
 {
@@ -268,7 +268,7 @@ namespace Resources.Repositories.ObjectManager
                 }
             });
         }
-        public bool DocumentHasBeenModified(int ArtifactID, FieldCollection _fields)
+        public bool DocumentHasBeenModified(int ArtifactID, KEH.FieldCollection _fields)
         {
             List<FieldRef> QFields = new List<FieldRef>();
             List<kCura.EventHandler.Field> ObjectFields = new List<kCura.EventHandler.Field>();
@@ -285,20 +285,20 @@ namespace Resources.Repositories.ObjectManager
             var DocumentData = Query(KRC.ArtifactType.Document, $"'Artifact ID' == {ArtifactID}", QFields).FirstOrDefault().FieldValues;
             foreach (var _field in ObjectFields)
             {
-                var StoredFieldValue = DocumentData.FirstOrDefault(s => s.Field.ArtifactID == _field.ArtifactID).Value;
-                var UpdatedFieldValue = (_field.Value as FieldValue).Value;
+                var StoredFieldValue = DocumentData.FirstOrDefault(s => s.Field.ArtifactID == _field.ArtifactID)?.Value;
+                var UpdatedFieldValue = (_field.Value as KEH.FieldValue)?.Value;
                 switch ((KRC.FieldType)_field.FieldTypeID)
                 {
                     case KRC.FieldType.FixedLengthText:
                     case KRC.FieldType.LongText:
                     case KRC.FieldType.WholeNumber:
-                    case KRC.FieldType.Currency:                    
                         if (StoredFieldValue.ToString() != UpdatedFieldValue.ToString())
                         {
                             return true;
                         }
                         break;
                     case KRC.FieldType.Decimal:
+                    case KRC.FieldType.Currency:
                         if (Convert.ToDecimal(StoredFieldValue) != Convert.ToDecimal(UpdatedFieldValue))
                         {
                             return true;
@@ -306,6 +306,86 @@ namespace Resources.Repositories.ObjectManager
                         break;
                     case KRC.FieldType.Date:
                         if (Convert.ToDateTime(StoredFieldValue) != Convert.ToDateTime(UpdatedFieldValue))
+                        {
+                            return true;
+                        }
+                        break;
+                    case KRC.FieldType.YesNo:
+                        if (Convert.ToBoolean(StoredFieldValue) != Convert.ToBoolean(UpdatedFieldValue))
+                        {
+                            return true;
+                        }
+                        break;
+                    case KRC.FieldType.SingleChoice:
+                        var _UpdatedFieldValue = (_field.Value as KEH.ChoiceFieldValue)?.Value as KEH.ChoiceCollection;
+                        var StoredField = (StoredFieldValue as Choice);
+                        KEH.Choice UpdatedField = null;
+                        var _updEnum = _UpdatedFieldValue.GetEnumerator();
+                        while (_updEnum.MoveNext())
+                        {
+                            UpdatedField = _updEnum.Current as KEH.Choice;
+                        }
+                        if (StoredField?.ArtifactID != UpdatedField?.ArtifactID)
+                        {
+                            return true;
+                        }
+                        break;
+                    case KRC.FieldType.MultipleChoice:
+                        var __UpdatedFieldValue = (_field.Value as KEH.ChoiceFieldValue)?.Value as KEH.ChoiceCollection;
+                        var _StoredField = (StoredFieldValue as List<Choice>);
+                        List<KEH.Choice> _UpdatedField = new List<KEH.Choice>();
+                        var __updEnum = __UpdatedFieldValue.GetEnumerator();
+                        while (__updEnum.MoveNext())
+                        {
+                            _UpdatedField.Add(__updEnum.Current as KEH.Choice);
+                        }
+                        if (_StoredField.Count() != _UpdatedField.Count())
+                        {
+                            return true;
+                        }
+                        else
+                        {
+                            for (int i = 0; i < _StoredField.Count(); i++)
+                            {
+                                if (_StoredField[i]?.ArtifactID != _UpdatedField[i]?.ArtifactID)
+                                {
+                                    return true;
+                                }
+                            }
+                        }
+                        break;
+                    case KRC.FieldType.SingleObject:
+                        if ((StoredFieldValue as RelativityObjectValue)?.ArtifactID != Convert.ToInt32(UpdatedFieldValue))
+                        {
+                            return true;
+                        }
+                        break;
+                    case KRC.FieldType.MultipleObject:
+                        var _MOStored = (StoredFieldValue as List<RelativityObjectValue>).Select(s => s.ArtifactID).ToArray();
+                        var _MOUpdated = (UpdatedFieldValue as int[]);
+                        if (_MOStored.Length != _MOUpdated.Length)
+                        {
+                            return true;
+                        }
+                        else
+                        {
+                            for (int i = 0; i < _MOStored.Length; i++)
+                            {
+                                if (_MOStored[i] != _MOUpdated[i])
+                                {
+                                    return true;
+                                }
+                            }
+                        }
+                        break;
+                    case KRC.FieldType.User:
+                        if (StoredFieldValue?.ToString() != UpdatedFieldValue?.ToString())
+                        {
+                            return true;
+                        }
+                        break;
+                    case KRC.FieldType.File:
+                        if (StoredFieldValue?.ToString() != UpdatedFieldValue?.ToString())
                         {
                             return true;
                         }
@@ -319,6 +399,19 @@ namespace Resources.Repositories.ObjectManager
                 }
             }
             return false;
+        }
+        public int GetSecondsSinceLastView(int ArtifactID)
+        {
+            var DocumentData = Query(ObjectTypes.ActivityLog, $"'{ActivityLogFields.Document}' IN OBJECT [{ArtifactID}]", new List<FieldRef>() {
+                new FieldRef() { Guid = new Guid(ActivityLogFields.DateTime)}
+            }, new List<Sort>() {
+                new Sort() {
+                    FieldIdentifier = new FieldRef() { Guid = new Guid(ActivityLogFields.DateTime)},
+                    Direction = SortEnum.Descending
+                }
+            }, 1, 1).FirstOrDefault();
+            var dtLastView = Convert.ToDateTime(DocumentData.FieldValues.First().Value);
+            return Convert.ToInt32((DateTime.Now - dtLastView).TotalSeconds);
         }
 
         //PRIVATE
