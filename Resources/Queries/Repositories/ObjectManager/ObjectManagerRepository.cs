@@ -339,7 +339,7 @@ namespace Resources.Repositories.ObjectManager
                         {
                             _UpdatedField.Add(__updEnum.Current as KEH.Choice);
                         }
-                        if (_StoredField.Count() != _UpdatedField.Count())
+                        if (_StoredField?.Count() != _UpdatedField?.Count())
                         {
                             return true;
                         }
@@ -400,18 +400,37 @@ namespace Resources.Repositories.ObjectManager
             }
             return false;
         }
-        public int GetSecondsSinceLastView(int ArtifactID)
+        public int GetSecondsSinceLastView(int ArtifactID, int UserArtifactID)
         {
-            var DocumentData = Query(ObjectTypes.ActivityLog, $"'{ActivityLogFields.Document}' IN OBJECT [{ArtifactID}]", new List<FieldRef>() {
+            DateTime dt = DateTime.Now;
+            int seconds = 0;
+            var DocumentData = Query(ObjectTypes.ActivityLog, $"'{ActivityLogFields.Document}' IN OBJECT [{ArtifactID}] AND '{ActivityLogFields.User}' == {UserArtifactID}", new List<FieldRef>() {
                 new FieldRef() { Guid = new Guid(ActivityLogFields.DateTime)}
             }, new List<Sort>() {
                 new Sort() {
                     FieldIdentifier = new FieldRef() { Guid = new Guid(ActivityLogFields.DateTime)},
                     Direction = SortEnum.Descending
                 }
-            }, 1, 1).FirstOrDefault();
-            var dtLastView = Convert.ToDateTime(DocumentData.FieldValues.First().Value);
-            return Convert.ToInt32((DateTime.Now - dtLastView).TotalSeconds);
+            }, 1, 2).ToArray();
+
+            if (DocumentData.Length > 0)
+            {
+                var dtLastView = Convert.ToDateTime(DocumentData[0].FieldValues.First().Value);
+                if((dt - dtLastView).TotalSeconds > 2)
+                {
+                    seconds = Convert.ToInt32((dt - dtLastView).TotalSeconds);
+                }
+                else if(DocumentData.Length > 1)
+                {
+                    dtLastView = Convert.ToDateTime(DocumentData[1].FieldValues.First().Value);
+                    if ((dt - dtLastView).TotalSeconds > 2)
+                    {
+                        seconds = Convert.ToInt32((dt - dtLastView).TotalSeconds);
+                        Delete(DocumentData[0].ArtifactID);
+                    }
+                }
+            }
+            return seconds;
         }
 
         //PRIVATE

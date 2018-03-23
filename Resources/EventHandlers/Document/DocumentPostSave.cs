@@ -24,7 +24,7 @@ namespace Resources.EventHandlers.Document
             Response response = new Response { Success = true };
             try
             {
-                InvokeWebService();
+                //InvokeWebService();
             }
             catch (Exception ex)
             {
