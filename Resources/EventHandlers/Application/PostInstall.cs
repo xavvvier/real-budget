@@ -17,6 +17,7 @@ namespace Resources.EventHandlers.Application
                 var context = Helper.GetDBContext(-1);
                 context.ExecuteNonQuerySQLStatement(Queries.Sql.CreateInstanceLevelTab);
                 context.ExecuteNonQuerySQLStatement(Queries.Sql.CreateUserPriceTable);
+                context.ExecuteNonQuerySQLStatement(Queries.Sql.InstanceSetting);
                 response.Success = true;
             }
             catch (Exception ex)

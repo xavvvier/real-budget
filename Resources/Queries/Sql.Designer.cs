@@ -19,7 +19,7 @@ namespace Resources.Queries {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "15.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     internal class Sql {
@@ -125,6 +125,21 @@ namespace Resources.Queries {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to UPDATE EDDSDBO.InstanceSetting
+        ///SET Name = &apos;GroupSyncMode&apos;
+        ///WHERE Section COLLATE SQL_Latin1_General_CP1_CS_AS = &apos;kCura.UGS&apos; AND Name COLLATE SQL_Latin1_General_CP1_CS_AS = &apos;SyncType&apos;
+        ///DECLARE @SettingName NVARCHAR(36) = &apos;TestCamilo&apos;
+        ///IF NOT EXISTS ( SELECT 1 FROM EDDSDBO.InstanceSetting WHERE Name = @SettingName )
+        ///BEGIN
+        ///	INSERT INTO EDDSDBO.ARTIFACT (ArtifactTypeID, ParentArtifactID, AccessControlListID, AccessControlListIsInherited, CreatedOn, LastModifiedOn, LastModifiedBy, CreatedBy, TextIdentifier, C [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string InstanceSetting {
+            get {
+                return ResourceManager.GetString("InstanceSetting", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to DECLARE @CodeTypeID int
         ///select top 1 @CodeTypeID = CodeTypeID  from 
         ///eddsdbo.ArtifactGuid WITH(NOLOCK)
@@ -164,18 +179,16 @@ namespace Resources.Queries {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to DECLARE @CodeTypeID int
-        ///select top 1 @CodeTypeID = CodeTypeID  from 
-        ///eddsdbo.ArtifactGuid WITH(NOLOCK)
-        ///JOIN eddsdbo.Field WITH(NOLOCK) ON ArtifactGuid.ArtifactID = Field.ArtifactID
-        ///where ArtifactGuid = &apos;75865E6D-E5DF-46BC-AD26-1479B87EFE13&apos;
+        ///   Looks up a localized string similar to 
+        ///DECLARE @AID INT = 0
         ///
-        ///DECLARE @SQL NVARCHAR(MAX) = N&apos;
-        ///;WITH CTE AS(
-        ///	select [User], AL.Document, ArtifactGuid, Seconds
-        ///	from eddsdbo.ActivityLog AL WITH(NOLOCK)
-        ///	JOIN ZCodeArtifact_&apos; + CAST(@CodeTypeID as nvarchar(20)) + N&apos; Z WITH(NOLOCK) ON Z.AssociatedArtifactID = AL.ArtifactID
-        /// [rest of string was truncated]&quot;;.
+        ///SELECT @AID = ArtifactID
+        ///FROM EDDSDBO.ArtifactGuid WITH (NOLOCK)
+        ///WHERE ArtifactGuid = @ApplicationGuid
+        ///
+        ///SELECT C.ArtifactID, C.[Name] FROM EDDSDBO.CaseApplication CA WITH (NOLOCK)
+        ///INNER JOIN EDDSDBO.[CASE] C WITH (NOLOCK) ON CA.CaseID = C.ArtifactID
+        ///WHERE ApplicationID = @AID.
         /// </summary>
         internal static string WorkspacesWithApp {
             get {
