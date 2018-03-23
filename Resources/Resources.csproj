@@ -126,6 +126,7 @@
     <Compile Include="EventHandlers\Document\DocumentPostSave.cs" />
     <Compile Include="EventHandlers\Document\DocumentPreload.cs" />
     <Compile Include="EventHandlers\Document\DocumentPreSave.cs" />
+    <Compile Include="Model\UserPrice.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Queries\Sql.Designer.cs">
       <AutoGen>True</AutoGen>
@@ -133,6 +134,7 @@
       <DependentUpon>Sql.resx</DependentUpon>
     </Compile>
     <Compile Include="Repositories\IDataRepository.cs" />
+    <Compile Include="Repositories\ISqlRepository.cs" />
     <Compile Include="Repositories\Logging\LoggingRepository.cs" />
     <Compile Include="Repositories\Logging\ILoggingRepository.cs" />
     <Compile Include="Repositories\ObjectManager\BaseRepository.cs" />
@@ -149,6 +151,9 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Queries\UserPrice\UpdateUserPrice.sql" />
+    <Content Include="Queries\UserPrice\GetAll.sql" />
+    <Content Include="Queries\UserPrice\CreateUserPriceTable.sql" />
     <Content Include="Queries\CreateInstanceLevelTab.sql" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
