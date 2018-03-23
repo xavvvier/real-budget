@@ -109,15 +109,15 @@
             </thead>
             <tbody>
                 <tr ng-repeat="workspace in vm.workspaces">
-                    <td>{{$index + 1}}</td>
+                    <td ng-bind="$index + 1"></td>
                     <td ng-bind="workspace.WorkspaceName"></td>
-                    <td>{{workspace.CostDay}}</td>
-                    <td>{{workspace.ViewsHour}}</td>
-                    <td>{{workspace.AverageTime}}</td>
-                    <td>{{workspace.EditsHour}}</td>
-                    <td>{{workspace.User.length}}</td>
+                    <td ng-bind="workspace.CostDay"></td>
+                    <td ng-bind="workspace.ViewsHour"></td>
+                    <td ng-bind="workspace.AverageTime"></td>
+                    <td ng-bind="workspace.EditsHour"></td>
+                    <td ng-bind="workspace.User.length"></td>
                     <td class="text-center">
-                        <a href="#" class="align-top" data-toggle="modal" data-target=".bd-example-modal-lg">
+                        <a href="#" class="align-top" data-toggle="modal" data-target=".bd-example-modal-lg" ng-click="vm.filterUsers(workspace.WorkspaceArtifactId)">
                             <span class="material-icons">more_horiz</span>
                         </a>
                     </td>
@@ -149,13 +149,13 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td>Camilo Molina</td>
-                            <td class="text-success">$10,00</td>
-                            <td>5</td>
-                            <td>20</td>
-                            <td>1</td>
+                        <tr ng-repeat="user in vm.users">
+                            <td ng-bind="$index + 1"></td>
+                            <td ng-bind="user.UserName"></td>
+                            <td class="text-success" ng-bind="user.CostDay"></td>
+                            <td ng-bind="user.ViewsHour"></td>
+                            <td ng-bind="user.AverageTime"></td>
+                            <td ng-bind="user.EditsHour"></td>
                         </tr>
                     </tbody>
                 </table>

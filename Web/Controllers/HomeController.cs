@@ -32,10 +32,10 @@ namespace Web.Controllers
             //users.Add(new User { UserArtifactId = 11111, UserName = "Molina, Cristian", CostDay = 10, ViewsHour = 3, ViewsHourBadge = 1, AverageTime = 10, EditsHour = 5, EditsHourBadge = 2 });
 
             //workspaces.Add(new WorkspaceInfo { WorkspaceArtifactId = 1000, WorkspaceName = "Workspace Local", User = users });
-            //workspaces.Add(new WorkspaceInfo { WorkspaceArtifactId = 1000, WorkspaceName = "Workspace Local", User = users });
-            //workspaces.Add(new WorkspaceInfo { WorkspaceArtifactId = 1000, WorkspaceName = "Workspace Local", User = users });
-            //workspaces.Add(new WorkspaceInfo { WorkspaceArtifactId = 1000, WorkspaceName = "Workspace Local", User = users });
-            //workspaces.Add(new WorkspaceInfo { WorkspaceArtifactId = 1000, WorkspaceName = "Workspace Local", User = users });
+            //workspaces.Add(new WorkspaceInfo { WorkspaceArtifactId = 1001, WorkspaceName = "Workspace Local", User = users });
+            //workspaces.Add(new WorkspaceInfo { WorkspaceArtifactId = 1002, WorkspaceName = "Workspace Local", User = users });
+            //workspaces.Add(new WorkspaceInfo { WorkspaceArtifactId = 1003, WorkspaceName = "Workspace Local", User = users });
+            //workspaces.Add(new WorkspaceInfo { WorkspaceArtifactId = 1004, WorkspaceName = "Workspace Local", User = users });
 
             //for (int i = 0; i < workspaces.Count(); i++)
             //{
