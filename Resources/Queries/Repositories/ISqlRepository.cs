@@ -10,5 +10,6 @@ namespace Resources.Repositories
         IEnumerable<UserPrice> GetAllUserPrice();
         void UpdateUserPrice(IEnumerable<UserPrice> users);
         List<WorkspaceInfo> GetWorkspacesInfo(DateTime start, DateTime end);
+        decimal GetTotalInstance();
     }
 }
