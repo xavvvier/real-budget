@@ -28,7 +28,8 @@ namespace Web
 
             bundles.Add(new ScriptBundle("~/bundles/angularjs").Include(
                       "~/Scripts/angular.js",
-                      "~/Scripts/angular-animate.js"
+                      "~/Scripts/angular-animate.js",
+                      "~/Scripts/angular-odometer.js"
                      ));
 
             bundles.Add(new ScriptBundle("~/bundles/RBApp").Include(

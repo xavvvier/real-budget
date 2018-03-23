@@ -20,7 +20,7 @@
                                     <span class="material-icons primary rb-icon">attach_money</span>
                                 </div>
                                 <div class="col-md-9 text-center">
-                                    <div class="rb-floating-text text-secondary" ng-bind="vm.cards.CostDay"></div>
+                                    <div class="rb-floating-text text-secondary"><ng-odometer value="vm.cards.CostDay"></ng-odometer></div>
                                 </div>
                             </div>
                         </div>
@@ -37,11 +37,11 @@
                                 <div class="col-md-9 text-center">
                                     <div class="row">
                                         <div class="col-md-6 text-center">
-                                            <div class="rb-floating-text text-secondary"><span ng-bind="vm.cards.ViewsHour"></span></div>
+                                            <div class="rb-floating-text text-secondary"><ng-odometer value="vm.cards.ViewsHour"></ng-odometer></div>
                                         </div>
                                         <div class="col-md-6 text-right">
                                             Distinct:
-                                            <span class="badge badge-success" title="Distinct"><span ng-bind="vm.cards.ViewsHourBadge"></span></span>
+                                            <span class="badge badge-success" title="Distinct"><ng-odometer value="vm.cards.ViewsHourBadge"></ng-odometer></span>
                                         </div>
                                     </div>
                                 </div>
@@ -58,7 +58,7 @@
                                     <span class="material-icons warning rb-icon">access_time</span>
                                 </div>
                                 <div class="col-md-9 text-center">
-                                    <div id="averageReviewHour" class="rb-floating-text text-secondary"><span ng-bind="vm.cards.AverageTime"></span></div>
+                                    <div id="averageReviewHour" class="rb-floating-text text-secondary"><ng-odometer value="vm.cards.AverageTime"></ng-odometer></div>
                                 </div>
                             </div>
                         </div>
@@ -75,11 +75,11 @@
                                 <div class="col-md-9">
                                     <div class="row">
                                         <div class="col-md-6 text-center">
-                                            <div id="editsHour" class="rb-floating-text text-secondary"><span ng-bind="vm.cards.EditsHour"></span></div>
+                                            <div id="editsHour" class="rb-floating-text text-secondary"><ng-odometer value="vm.cards.EditsHour"></ng-odometer></div>
                                         </div>
                                         <div class="col-md-6 text-right">
                                             Distinct:
-                                            <span id="editsHourBadge" class="badge badge-danger" title="Distinct"><span ng-bind="vm.cards.EditsHourBadge"></span></span>
+                                            <span id="editsHourBadge" class="badge badge-danger" title="Distinct"><ng-odometer value="vm.cards.EditsHourBadge"></ng-odometer></span>
                                         </div>
                                     </div>
                                 </div>
