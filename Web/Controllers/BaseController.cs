@@ -1,6 +1,7 @@
 ﻿using Relativity.CustomPages;
 using Resources.Repositories;
 using Resources.Repositories.ObjectManager;
+using Resources.Repositories.Sql;
 using System.Web.Mvc;
 
 namespace Web.Controllers
@@ -23,6 +24,28 @@ namespace Web.Controllers
             get
             {
                 return int.Parse(Request.Params["AppID"] ?? Request.Params["WorkspaceID"] ?? Request.Headers["AppID"]);
+            }
+        }
+
+        private Relativity.API.IDBContext Context
+        {
+            get
+            {
+                return ConnectionHelper.Helper().GetDBContext(-1);
+            }
+        }
+
+
+        private ISqlRepository _SqlRepository;
+        public ISqlRepository SqlRepository
+        {
+            get
+            {
+                if(_SqlRepository == null)
+                {
+                    _SqlRepository = new SqlRepository(ConnectionHelper.Helper().GetDBContext);
+                }
+                return _SqlRepository;
             }
         }
     }

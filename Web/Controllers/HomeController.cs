@@ -1,17 +1,15 @@
-﻿using Microsoft.AspNet.SignalR;
-using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
-using Web.Models;
+using Resources.Models;
+using System;
 
 namespace Web.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : BaseController
     {
-        List<Workspace> workspace;
-        List<User> user;
+        List<WorkspaceInfo> workspaces;
+        List<User> users;
         Notification notification;
 
         public ActionResult Index()
@@ -22,46 +20,47 @@ namespace Web.Controllers
         [HttpPost]
         public ActionResult GetWorkspacesData()
         {
-            workspace = new List<Workspace>();
-            user = new List<User>();
+            workspaces = new List<WorkspaceInfo>();
+            users = new List<User>();
             notification = new Notification();
 
-            user.Add(new User { UserArtifactId = 11111, UserName = "Molina, Cristian", CostDay = 10, ViewsHour = 3, ViewsHourBadge = 1, AverageTime = 10, EditsHour = 5, EditsHourBadge = 2 });
-            user.Add(new User { UserArtifactId = 11111, UserName = "Molina, Cristian", CostDay = 10, ViewsHour = 3, ViewsHourBadge = 1, AverageTime = 10, EditsHour = 5, EditsHourBadge = 2 });
-            user.Add(new User { UserArtifactId = 11111, UserName = "Molina, Cristian", CostDay = 10, ViewsHour = 3, ViewsHourBadge = 1, AverageTime = 10, EditsHour = 5, EditsHourBadge = 2 });
-            user.Add(new User { UserArtifactId = 11111, UserName = "Molina, Cristian", CostDay = 10, ViewsHour = 3, ViewsHourBadge = 1, AverageTime = 10, EditsHour = 5, EditsHourBadge = 2 });
-            user.Add(new User { UserArtifactId = 11111, UserName = "Molina, Cristian", CostDay = 10, ViewsHour = 3, ViewsHourBadge = 1, AverageTime = 10, EditsHour = 5, EditsHourBadge = 2 });
+            workspaces = SqlRepository.GetWorkspacesInfo(DateTime.Today, DateTime.Today.AddDays(1));
+            //users.Add(new User { UserArtifactId = 11111, UserName = "Molina, Cristian", CostDay = 10, ViewsHour = 3, ViewsHourBadge = 1, AverageTime = 10, EditsHour = 5, EditsHourBadge = 2 });
+            //users.Add(new User { UserArtifactId = 11111, UserName = "Molina, Cristian", CostDay = 10, ViewsHour = 3, ViewsHourBadge = 1, AverageTime = 10, EditsHour = 5, EditsHourBadge = 2 });
+            //users.Add(new User { UserArtifactId = 11111, UserName = "Molina, Cristian", CostDay = 10, ViewsHour = 3, ViewsHourBadge = 1, AverageTime = 10, EditsHour = 5, EditsHourBadge = 2 });
+            //users.Add(new User { UserArtifactId = 11111, UserName = "Molina, Cristian", CostDay = 10, ViewsHour = 3, ViewsHourBadge = 1, AverageTime = 10, EditsHour = 5, EditsHourBadge = 2 });
+            //users.Add(new User { UserArtifactId = 11111, UserName = "Molina, Cristian", CostDay = 10, ViewsHour = 3, ViewsHourBadge = 1, AverageTime = 10, EditsHour = 5, EditsHourBadge = 2 });
 
-            workspace.Add(new Workspace { WorkspaceArtifactId = 1000, WorkspaceName = "Workspace Local", User = user });
-            workspace.Add(new Workspace { WorkspaceArtifactId = 1000, WorkspaceName = "Workspace Local", User = user });
-            workspace.Add(new Workspace { WorkspaceArtifactId = 1000, WorkspaceName = "Workspace Local", User = user });
-            workspace.Add(new Workspace { WorkspaceArtifactId = 1000, WorkspaceName = "Workspace Local", User = user });
-            workspace.Add(new Workspace { WorkspaceArtifactId = 1000, WorkspaceName = "Workspace Local", User = user });
+            //workspaces.Add(new WorkspaceInfo { WorkspaceArtifactId = 1000, WorkspaceName = "Workspace Local", User = users });
+            //workspaces.Add(new WorkspaceInfo { WorkspaceArtifactId = 1000, WorkspaceName = "Workspace Local", User = users });
+            //workspaces.Add(new WorkspaceInfo { WorkspaceArtifactId = 1000, WorkspaceName = "Workspace Local", User = users });
+            //workspaces.Add(new WorkspaceInfo { WorkspaceArtifactId = 1000, WorkspaceName = "Workspace Local", User = users });
+            //workspaces.Add(new WorkspaceInfo { WorkspaceArtifactId = 1000, WorkspaceName = "Workspace Local", User = users });
 
-            for (int i = 0; i < workspace.Count(); i++)
-            {
-                for (int j = 0; j < workspace[i].User.Count(); j++)
-                {
-                    workspace[i].CostDay += workspace[i].User[j].CostDay;
-                    workspace[i].ViewsHour += workspace[i].User[j].ViewsHour;
-                    workspace[i].ViewsHourBadge += workspace[i].User[j].ViewsHourBadge;
-                    workspace[i].AverageTime += workspace[i].User[j].AverageTime;
-                    workspace[i].EditsHour += workspace[i].User[j].EditsHour;
-                    workspace[i].EditsHourBadge += workspace[i].User[j].EditsHourBadge;
-                }
-            }
+            //for (int i = 0; i < workspaces.Count(); i++)
+            //{
+            //    for (int j = 0; j < workspaces[i].User.Count(); j++)
+            //    {
+            //        workspaces[i].CostDay += workspaces[i].User[j].CostDay;
+            //        workspaces[i].ViewsHour += workspaces[i].User[j].ViewsHour;
+            //        workspaces[i].ViewsHourBadge += workspaces[i].User[j].ViewsHourBadge;
+            //        workspaces[i].AverageTime += workspaces[i].User[j].AverageTime;
+            //        workspaces[i].EditsHour += workspaces[i].User[j].EditsHour;
+            //        workspaces[i].EditsHourBadge += workspaces[i].User[j].EditsHourBadge;
+            //    }
+            //}
 
            
 
            
-            return Json(workspace);
+            return Json(workspaces);
         }
 
         [HttpPost]
         public ActionResult GetSummary()
         {
             GetWorkspacesData();
-            var list = this.workspace;
+            var list = this.workspaces;
             var CostDay = 0;
             var ViewsHour = 0;
             var ViewsHourBadge = 0;
@@ -78,7 +77,7 @@ namespace Web.Controllers
                 EditsHour += list[i].EditsHour;
                 EditsHourBadge += list[i].EditsHourBadge;
             }
-            Workspace wk = new Workspace();
+            WorkspaceInfo wk = new WorkspaceInfo();
             wk.CostDay = CostDay;
             wk.ViewsHour = ViewsHour;
             wk.ViewsHourBadge = ViewsHourBadge;
