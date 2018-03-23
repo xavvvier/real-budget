@@ -42,6 +42,31 @@ namespace Resources.Repositories.Sql
             return infoList;
         }
 
+        public decimal GetTotalInstance()
+        {
+            var users = GetAllUserPrice();
+            var workspacesWithApp = WorkspacesWithAppInstalled();
+            decimal total = 0;
+            foreach (var workspace in workspacesWithApp)
+            {
+                var table = Context(workspace.ArtifactID).ExecuteSqlStatementAsDataTable(Queries.Sql.TotalTimeByUSer);
+                var userTimes = table.AsEnumerable().Select(row => new UserTime
+                {
+                    ArtifactID = (int)row["User"],
+                    TotalSeconds = (int)row["TotalSeconds"]
+                }).ToList();
+                foreach (var userTime in userTimes)
+                {
+                    var userPrice = users.FirstOrDefault(x => x.ArtifactID == userTime.ArtifactID);
+                    if(userPrice != null)
+                    {
+                        total += userPrice.PricePerHour * (userTime.TotalSeconds / 3600);
+                    }
+                }
+            }
+            return total;
+        }
+
         public WorkspaceInfo ReadWorkspaceInfo(Artifact workspace, DateTime start, DateTime end)
         {
             var users = GetAllUserPrice();
@@ -101,7 +126,7 @@ namespace Resources.Repositories.Sql
             {
                 ArtifactID = (int)row["ArtifactID"],
                 Name = row["Name"].ToString()
-            });
+            }).Where(x => x.ArtifactID > 0);
         }
 
         public void UpdateUserPrice(IEnumerable<UserPrice> users)

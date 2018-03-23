@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
+using System.Web.Http.ExceptionHandling;
+using Web.App_Start;
 
 namespace Web
 {
@@ -19,6 +21,7 @@ namespace Web
                 routeTemplate: "api/{controller}/{action}/{id}",
                 defaults: new { id = RouteParameter.Optional }
             );
+            config.Services.Add(typeof(IExceptionLogger), new TraceExceptionLogger());
         }
     }
 }
