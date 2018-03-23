@@ -44,6 +44,7 @@
                 EditsHourBadge += list[i].EditsHourBadge;
             }
 
+            vm.budgetProgress = list[0].budgetProgress;            
             vm.cards.CostDay = CostDay;
             vm.cards.ViewsHour = ViewsHour;
             vm.cards.ViewsHourBadge = ViewsHourBadge;
