@@ -10,6 +10,8 @@
         vm.workspaces = {};
         vm.filterUsers = filterUsers;
         vm.users = [];
+        vm.usersSettings = [];
+        vm.saveUser = saveUser;
 
         $http.post(baseUrl + 'Home/GetWorkspacesData')
             .then(function (response) {
@@ -17,6 +19,11 @@
 
                 getSummary(vm.workspaces);
               
+            });
+
+        $http.get(baseUrl + 'api/User/GetAll')
+            .then(function (response) {
+                vm.usersSettings = response.data;
             });
 
         function getSummary(workspaces) {
@@ -45,23 +52,18 @@
             vm.cards.EditsHourBadge = EditsHourBadge;
         }
 
-    //function userTests() {
-    //    $http.get(baseUrl + 'api/User/GetAll')
-    //        .then(function (response) {
-    //            console.log(response);
-    //        });
-    //    var usersToUpdate = [
-    //        {
-    //            ArtifactID: 9,
-    //            PricePerHour: new Date().getSeconds()
-    //        }
-    //    ];
-    //    $http.post(baseUrl + 'api/User/UpdatePrices', usersToUpdate)
-    //        .then(function (response) {
-    //            console.log(response);
-    //        });
-    //}
-    //userTests();
+        function saveUser(ArtifactID, PricePerHour) {
+            var usersToUpdate = [
+            {
+                    ArtifactID: ArtifactID,
+                    PricePerHour: PricePerHour
+            }
+        ];
+        $http.post(baseUrl + 'api/User/UpdatePrices', usersToUpdate)
+            .then(function (response) {
+                console.log(response);
+            });
+        }
 
     function filterUsers(ArtifactId) {
         var index = categoryIndex(ArtifactId);
