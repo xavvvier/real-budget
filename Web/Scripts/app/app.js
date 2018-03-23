@@ -8,6 +8,8 @@
         var vm = this;
         vm.cards = [];
         vm.workspaces = {};
+        vm.filterUsers = filterUsers;
+        vm.users = [];
 
         $http.post(baseUrl + 'Home/GetWorkspacesData')
             .then(function (response) {
@@ -36,18 +38,33 @@
                 });
         }
         userTests();
+
+        function filterUsers(ArtifactId) {
+            var index = categoryIndex(ArtifactId);
+            vm.users = vm.workspaces[index].User;
+        }
+
+        function categoryIndex(ArtifactId) {
+            var index;
+            for (var i = 0; i < vm.workspaces.length; ++i) {
+                if (vm.workspaces[i].WorkspaceArtifactId == ArtifactId) {
+                    index = i;
+                    break;
+                }
+            }
+            return index;
+        }
+
         vm.hub = $.connection.mainHub;
         
         vm.hub.client.broadCastMessage = function (message) {
-            console.log(message);
             $scope.$apply(function () {
                 vm.workspaces = message;
             });
         }
         vm.hub.client.instanceSummary = function (message) {
-            console.log(message);
             $scope.$apply(function () {
-                //vm.workspaces = message;
+                vm.card = message;
             });
         }
 

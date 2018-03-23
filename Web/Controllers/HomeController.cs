@@ -27,16 +27,16 @@ namespace Web.Controllers
             notification = new Notification();
 
             user.Add(new User { UserArtifactId = 11111, UserName = "Molina, Cristian", CostDay = 10, ViewsHour = 3, ViewsHourBadge = 1, AverageTime = 10, EditsHour = 5, EditsHourBadge = 2 });
-            user.Add(new User { UserArtifactId = 11111, UserName = "Molina, Cristian", CostDay = 10, ViewsHour = 3, ViewsHourBadge = 1, AverageTime = 10, EditsHour = 5, EditsHourBadge = 2 });
-            user.Add(new User { UserArtifactId = 11111, UserName = "Molina, Cristian", CostDay = 10, ViewsHour = 3, ViewsHourBadge = 1, AverageTime = 10, EditsHour = 5, EditsHourBadge = 2 });
-            user.Add(new User { UserArtifactId = 11111, UserName = "Molina, Cristian", CostDay = 10, ViewsHour = 3, ViewsHourBadge = 1, AverageTime = 10, EditsHour = 5, EditsHourBadge = 2 });
-            user.Add(new User { UserArtifactId = 11111, UserName = "Molina, Cristian", CostDay = 10, ViewsHour = 3, ViewsHourBadge = 1, AverageTime = 10, EditsHour = 5, EditsHourBadge = 2 });
+            user.Add(new User { UserArtifactId = 11112, UserName = "Molina, Cristian", CostDay = 10, ViewsHour = 3, ViewsHourBadge = 1, AverageTime = 10, EditsHour = 5, EditsHourBadge = 2 });
+            user.Add(new User { UserArtifactId = 11113, UserName = "Molina, Cristian", CostDay = 10, ViewsHour = 3, ViewsHourBadge = 1, AverageTime = 10, EditsHour = 5, EditsHourBadge = 2 });
+            user.Add(new User { UserArtifactId = 11114, UserName = "Molina, Cristian", CostDay = 10, ViewsHour = 3, ViewsHourBadge = 1, AverageTime = 10, EditsHour = 5, EditsHourBadge = 2 });
+            user.Add(new User { UserArtifactId = 11115, UserName = "Molina, Cristian", CostDay = 10, ViewsHour = 3, ViewsHourBadge = 1, AverageTime = 10, EditsHour = 5, EditsHourBadge = 2 });
 
             workspace.Add(new Workspace { WorkspaceArtifactId = 1000, WorkspaceName = "Workspace Local", User = user });
-            workspace.Add(new Workspace { WorkspaceArtifactId = 1000, WorkspaceName = "Workspace Local", User = user });
-            workspace.Add(new Workspace { WorkspaceArtifactId = 1000, WorkspaceName = "Workspace Local", User = user });
-            workspace.Add(new Workspace { WorkspaceArtifactId = 1000, WorkspaceName = "Workspace Local", User = user });
-            workspace.Add(new Workspace { WorkspaceArtifactId = 1000, WorkspaceName = "Workspace Local", User = user });
+            workspace.Add(new Workspace { WorkspaceArtifactId = 1001, WorkspaceName = "Workspace Local", User = user });
+            workspace.Add(new Workspace { WorkspaceArtifactId = 1002, WorkspaceName = "Workspace Local", User = user });
+            workspace.Add(new Workspace { WorkspaceArtifactId = 1003, WorkspaceName = "Workspace Local", User = user });
+            workspace.Add(new Workspace { WorkspaceArtifactId = 1004, WorkspaceName = "Workspace Local", User = user });
 
             for (int i = 0; i < workspace.Count(); i++)
             {
@@ -50,10 +50,6 @@ namespace Web.Controllers
                     workspace[i].EditsHourBadge += workspace[i].User[j].EditsHourBadge;
                 }
             }
-
-           
-
-           
             return Json(workspace);
         }
 

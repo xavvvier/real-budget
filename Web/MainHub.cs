@@ -13,12 +13,4 @@ namespace Web
             Clients.All.broadCastMessage(name, message);
         }
     }
-
-    public class MainHub2 : Hub
-    {
-        public void Send(string name, string message)
-        {
-            Clients.All.broadCastMessage(name, message);
-        }
-    }
 }
