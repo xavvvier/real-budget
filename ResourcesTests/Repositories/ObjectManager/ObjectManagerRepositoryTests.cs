@@ -72,7 +72,7 @@ namespace Resources.Repositories.ObjectManager.Tests
         public void InsertDocumentViewTest()
         {
             //_ObjectManagerRepo.InsertDocumentActivity(1045766, 9, ActionChoices.View, 0);
-            var t = _ObjectManagerRepo.GetSecondsSinceLastView(1045766);
+            var t = _ObjectManagerRepo.GetSecondsSinceLastView(1045766, 9);
         }
     }
 }
