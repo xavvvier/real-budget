@@ -7,13 +7,16 @@
     @Styles.Render("~/Content/css")
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     @Scripts.Render("~/bundles/modernizr")
-</head>
-<body>
-   
-        @RenderBody()
-
     @Scripts.Render("~/bundles/jquery")
+
+</head>
+<body ng-app="RBApp" ng-controller="RBAppCtrl as vm">
+
+    @RenderBody()
+
     @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/angularjs")
+    @Scripts.Render("~/bundles/RBApp")
     @RenderSection("scripts", required: false)
     <script src="http://github.hubspot.com/odometer/odometer.js"></script>
 </body>

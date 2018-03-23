@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNet.SignalR;
 using Microsoft.AspNet.SignalR.Hubs;
 using System;
+using System.Collections.Generic;
 using System.Web.Http;
 using Web.Models;
 
@@ -14,9 +15,15 @@ namespace Web.Controllers
             GlobalHost.ConnectionManager.GetHubContext<MainHub>().Clients);
 
         [HttpPost]
-        public void BroadcastNotification(Notification notification)
+        public void WorkspacesNotification(List<Workspace> workspace)
         {
-            _instance.Value.All.broadCastMessage(notification.UserName, "Test");
+            _instance.Value.All.broadCastMessage(workspace);
+        }
+        [HttpPost]
+
+        public void SummaryNotification(Workspace workspace)
+        {
+            _instance.Value.All.instanceSummary(workspace);
         }
     }
 }

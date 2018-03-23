@@ -1,6 +1,7 @@
 ﻿@{
     ViewBag.Title = "Home Page";
 }
+<script src="~/signalr/hubs"></script>
 
 
 <div class="rb-padding">
@@ -19,7 +20,7 @@
                                     <span class="material-icons primary rb-icon">attach_money</span>
                                 </div>
                                 <div class="col-md-9 text-center">
-                                    <div id="odometer" class="odometer rb-floating-text text-secondary">0</div>
+                                    <div class="rb-floating-text text-secondary" ng-bind="vm.cards.CostDay"></div>
                                 </div>
                             </div>
                         </div>
@@ -36,11 +37,11 @@
                                 <div class="col-md-9 text-center">
                                     <div class="row">
                                         <div class="col-md-6 text-center">
-                                            <div id="odometer1" class="odometer rb-floating-text text-secondary">0</div>
+                                            <div class="rb-floating-text text-secondary"><span ng-bind="vm.cards.ViewsHour"></span></div>
                                         </div>
                                         <div class="col-md-6 text-right">
                                             Distinct:
-                                            <span id="odometerBadge" class="odometer badge badge-success" title="Distinct">0</span>
+                                            <span class="badge badge-success" title="Distinct"><span ng-bind="vm.cards.ViewsHourBadge"></span></span>
                                         </div>
                                     </div>
                                 </div>
@@ -57,7 +58,7 @@
                                     <span class="material-icons warning rb-icon">access_time</span>
                                 </div>
                                 <div class="col-md-9 text-center">
-                                    <div id="odometer2" class="odometer rb-floating-text text-secondary">0</div>
+                                    <div id="averageReviewHour" class="rb-floating-text text-secondary"><span ng-bind="vm.cards.AverageTime"></span></div>
                                 </div>
                             </div>
                         </div>
@@ -74,11 +75,11 @@
                                 <div class="col-md-9">
                                     <div class="row">
                                         <div class="col-md-6 text-center">
-                                            <div id="odometer3" class="odometer rb-floating-text text-secondary">0</div>
+                                            <div id="editsHour" class="rb-floating-text text-secondary"><span ng-bind="vm.cards.EditsHour"></span></div>
                                         </div>
                                         <div class="col-md-6 text-right">
                                             Distinct:
-                                            <span id="odometerBadge1" class="odometer badge badge-danger" title="Distinct">0</span>
+                                            <span id="editsHourBadge" class="badge badge-danger" title="Distinct"><span ng-bind="vm.cards.EditsHourBadge"></span></span>
                                         </div>
                                     </div>
                                 </div>
@@ -107,19 +108,17 @@
                 </tr>
             </thead>
             <tbody>
-                <tr data-toggle="collapse" data-target=".order1">
-                    <td class="text-center">1</td>
-                    <td>2</td>
-                    <td>3</td>
-                    <td>4</td>
-                    <td>5</td>
-                    <td>6</td>
-                    <td>7</td>
+                <tr ng-repeat="workspace in vm.workspaces">
+                    <td>{{$index + 1}}</td>
+                    <td ng-bind="workspace.WorkspaceName"></td>
+                    <td>{{workspace.CostDay}}</td>
+                    <td>{{workspace.ViewsHour}}</td>
+                    <td>{{workspace.AverageTime}}</td>
+                    <td>{{workspace.EditsHour}}</td>
+                    <td>{{workspace.User.length}}</td>
                     <td class="text-center">
-                        <a href="#">
-                            <a href="#" class="align-top" data-toggle="modal" data-target=".bd-example-modal-lg">
-                                <span class="material-icons">more_horiz</span>
-                            </a>
+                        <a href="#" class="align-top" data-toggle="modal" data-target=".bd-example-modal-lg">
+                            <span class="material-icons">more_horiz</span>
                         </a>
                     </td>
                 </tr>
@@ -128,80 +127,80 @@
     </div>
 </div>
 
-
-
-    <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Workspace Details</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <table class="table table-bordered table-hover">
-                        <thead>
-                            <tr>
-                                <th scope="col">#</th>
-                                <th scope="col">User Name</th>
-                                <th scope="col">Cost / Day</th>
-                                <th scope="col">Views / Hour</th>
-                                <th scope="col">Average / Review</th>
-                                <th scope="col">Edits / Hour</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>Camilo Molina</td>
-                                <td class="text-success">$10,00</td>
-                                <td>5</td>
-                                <td>20</td>
-                                <td>1</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
+<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Workspace Details</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <table class="table table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">User Name</th>
+                            <th scope="col">Cost / Day</th>
+                            <th scope="col">Views / Hour</th>
+                            <th scope="col">Average / Review</th>
+                            <th scope="col">Edits / Hour</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>Camilo Molina</td>
+                            <td class="text-success">$10,00</td>
+                            <td>5</td>
+                            <td>20</td>
+                            <td>1</td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
+</div>
 
-    <div class="modal fade modal-settings" tabindex="-1" role="dialog" aria-labelledby="modal-settings" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Settings</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <table class="table table-bordered table-hover">
-                        <thead>
-                            <tr>
-                                <th scope="col">#</th>
-                                <th scope="col">User Name</th>
-                                <th scope="col">Price per Hour</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>Camilo Molina</td>
-                                <td><input type="number" class="form-control mb-2"></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
+<div class="modal fade modal-settings" tabindex="-1" role="dialog" aria-labelledby="modal-settings" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Settings</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <table class="table table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">User Name</th>
+                            <th scope="col">Price per Hour</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1</td>
+                            <td>Camilo Molina</td>
+                            <td><input type="number" class="form-control mb-2"></td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>
+</div>
 
 
 
-
-
+<script type="text/javascript">
+    var GetWorkspacesSummaryURL = '@Url.Action("GetWorkspacesData", "Home")';
+    var GetSummaryURL = '@Url.Action("GetSummary", "Home")';
+</script>
 
 
 

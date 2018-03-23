@@ -7,12 +7,11 @@ namespace Web.Models
 {
     public class Notification
     {
-        public int WorkspaceID { get; set; }
-        public int UserID { get; set; }
-        public string UserName { get; set; }
-        public string Action { get; set; }
-        public int TotalEdits { get; set; }
-        public int DistinctEdits { get; set; }
+        public int CostDay { get; set; }
+        public int ViewsHour { get; set; }
+        public int ViewsHourBadge { get; set; }
         public int AverageTime { get; set; }
+        public int EditsHour { get; set; }
+        public int EditsHourBadge { get; set; }
     }
 }
