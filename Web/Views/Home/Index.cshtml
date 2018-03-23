@@ -117,7 +117,7 @@
                     <td ng-bind="workspace.EditsHour"></td>
                     <td ng-bind="workspace.User.length"></td>
                     <td class="text-center">
-                        <a href="#" class="align-top" data-toggle="modal" data-target=".bd-example-modal-lg" ng-click="vm.filterUsers(workspace.WorkspaceArtifactId)">
+                        <a href="" class="align-top" data-toggle="modal" data-target=".modal-workspace-details" ng-click="vm.filterUsers(workspace.WorkspaceArtifactId)">
                             <span class="material-icons">more_horiz</span>
                         </a>
                     </td>
@@ -127,11 +127,11 @@
     </div>
 </div>
 
-<div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+<div class="modal fade modal-workspace-details" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Workspace Details</h5>
+                <h5 class="modal-title">Workspace Details</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
