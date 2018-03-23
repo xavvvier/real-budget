@@ -1,6 +1,7 @@
 ﻿using kCura.EventHandler;
 using NSerio.Relativity.WebAuthentication;
 using Relativity.API;
+using Resources.Constants;
 using Resources.Repositories;
 using Resources.Repositories.ObjectManager;
 using RestSharp;
@@ -37,7 +38,7 @@ namespace Resources.EventHandlers.Document
 
         private void InvokeWebService()
         {
-            var myUri = this.Helper.GetUrlHelper().GetApplicationURL(new Guid("C4EF15B9-516F-4C2D-9566-EA1FC2A617BD"));
+            var myUri = this.Helper.GetUrlHelper().GetApplicationURL(GlobalConstants.CUSTOM_PAGE_GUID);
             IWebAuthenticationHelper webAuthenticationHelper = new WebAuthenticationHelper
             {
                 GetDBContext = GetCaseDBContext,
@@ -45,7 +46,8 @@ namespace Resources.EventHandlers.Document
                 UserArtifactID = 777,
             };
             var auth = new NSerio.Relativity.WebAuthentication.Core.Authentication(webAuthenticationHelper);
-            IRestRequest request = new RestRequest("Relativity/CustomPages/c4ef15b9-516f-4c2d-9566-ea1fc2a617bd/api/Notification");
+            var custompageGuid = GlobalConstants.CUSTOM_PAGE_GUID.ToString();
+            IRestRequest request = new RestRequest($"Relativity/CustomPages/{custompageGuid}/api/Notification");
             request.Method = Method.POST;
             string jsonToSend = @"{
                     ""UserName"": ""Relativity Admin"",
