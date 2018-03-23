@@ -8,5 +8,6 @@
         public int AverageTime { get; set; }
         public int EditsHour { get; set; }
         public int EditsHourBadge { get; set; }
+        public int Seconds { get; set; }
     }
 }

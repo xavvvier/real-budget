@@ -40,6 +40,7 @@ namespace Web
                       "~/Content/bootstrap.css",
                       "~/Content/odometer-theme-default.css",
                       "~/Content/site.css"));
+            BundleTable.EnableOptimizations = false;
         }
     }
 }

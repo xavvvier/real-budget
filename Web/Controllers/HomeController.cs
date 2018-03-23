@@ -20,11 +20,19 @@ namespace Web.Controllers
         [HttpPost]
         public ActionResult GetWorkspacesData()
         {
-            workspaces = new List<WorkspaceInfo>();
-            users = new List<User>();
-            notification = new Notification();
+            try
+            {
+                workspaces = new List<WorkspaceInfo>();
+                users = new List<User>();
+                notification = new Notification();
 
-            workspaces = SqlRepository.GetWorkspacesInfo(DateTime.Today, DateTime.Today.AddDays(1));
+                workspaces = SqlRepository.GetWorkspacesInfo(DateTime.Today, DateTime.Today.AddDays(1));
+            }
+            catch (Exception ex)
+            {
+
+                throw ex ;
+            }
             //users.Add(new User { UserArtifactId = 11111, UserName = "Molina, Cristian", CostDay = 10, ViewsHour = 3, ViewsHourBadge = 1, AverageTime = 10, EditsHour = 5, EditsHourBadge = 2 });
             //users.Add(new User { UserArtifactId = 11111, UserName = "Molina, Cristian", CostDay = 10, ViewsHour = 3, ViewsHourBadge = 1, AverageTime = 10, EditsHour = 5, EditsHourBadge = 2 });
             //users.Add(new User { UserArtifactId = 11111, UserName = "Molina, Cristian", CostDay = 10, ViewsHour = 3, ViewsHourBadge = 1, AverageTime = 10, EditsHour = 5, EditsHourBadge = 2 });
