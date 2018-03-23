@@ -1,24 +1,56 @@
-﻿body {
-    padding-top: 50px;
-    padding-bottom: 20px;
+﻿.rb-padding {
+    padding: 3%;
 }
 
-/* Set padding to keep content from hitting the edges */
-.body-content {
-    padding-left: 15px;
-    padding-right: 15px;
+.rb-padding-top {
+    padding-top: 1%;
 }
 
-/* Override the default bootstrap behavior where horizontal description lists 
-   will truncate terms that are too long to fit in the left column 
-*/
-.dl-horizontal dt {
-    white-space: normal;
+.rb-card {
+    width: 22rem;
 }
 
-/* Set width on the form input elements since they're 100% wide by default */
-input,
-select,
-textarea {
-    max-width: 280px;
+.rb-icon {
+    font-size: 300%!important;
+}
+
+.rb-floating-text {
+    font-size: 300%;
+}
+
+.rb-card-title {
+    font-size: 30px;
+    text-align: center;
+}
+
+.rb-card-deck {
+    margin-left: 60px;
+}
+
+.rb-p {
+    font-size: -10px;
+}
+
+.material-icons.primary {
+    color: #007BFF;
+}
+
+.material-icons.secondary {
+    color: #6C757D;
+}
+
+.material-icons.success {
+    color: #28A745;
+}
+
+.material-icons.info {
+    color: #17A2B8;
+}
+
+.material-icons.warning {
+    color: #FFC107;
+}
+
+.material-icons.danger {
+    color: #DC3545;
 }

@@ -1,9 +1,33 @@
-﻿
-    setTimeout(function () {
-        odometer.innerHTML = 101000;
-    odometer1.innerHTML = 130;
-        odometer2.innerHTML = 1200;
-        odometer3.innerHTML = 15;
-        odometerBadge.innerHTML = 100;
-        odometerBadge1.innerHTML = 5;
-    }, 1000);
+﻿(function () {
+    'use strict';
+
+    var RBApp = angular.module('RBApp', []);
+
+
+    RBApp.controller('RBAppCtrl', function RBAppCtrl($scope, $timeout, $http) {
+        var vm = this;
+        vm.cards = [];
+        vm.workspaces = {};
+
+        $http.post(GetWorkspacesSummaryURL)
+            .then(function (response) {
+                vm.workspaces = response.data;
+            });
+
+        $http.post(GetSummaryURL)
+            .then(function (response) {
+                vm.cards = response.data;
+            });
+
+        vm.hub = $.connection.mainHub;
+        
+        vm.hub.client.broadCastMessage = function (message) {
+            console.log(message);
+            $scope.$apply(function () {
+                vm.workspaces = message;
+            });
+        }
+
+        $.connection.hub.start();
+    });
+})();
