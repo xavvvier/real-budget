@@ -9,6 +9,7 @@ namespace Resources.Constants
     public class GlobalConstants
     {
         public const string APPNAME = "Real-Budget";
+        public static Guid CUSTOM_PAGE_GUID = new Guid("c4ef15b9-516f-4c2d-9566-ea1fc2a617bd");
     }
     public class ObjectTypes
     {
@@ -27,4 +28,6 @@ namespace Resources.Constants
         public const string View = "169E13CC-7885-4C44-9846-DF537536DDDA";
         public const string Edit = "5D94419E-B513-422E-BEED-E5881747D5E1";
     }
+
+
 }
