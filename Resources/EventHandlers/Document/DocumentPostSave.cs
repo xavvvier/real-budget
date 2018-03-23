@@ -4,8 +4,10 @@ using Relativity.API;
 using Resources.Constants;
 using Resources.Repositories;
 using Resources.Repositories.ObjectManager;
+using Resources.Repositories.Sql;
 using RestSharp;
 using System;
+using System.Web.Script.Serialization;
 
 namespace Resources.EventHandlers.Document
 {
@@ -24,7 +26,7 @@ namespace Resources.EventHandlers.Document
             Response response = new Response { Success = true };
             try
             {
-                //InvokeWebService();
+                InvokeWebService();
             }
             catch (Exception ex)
             {
@@ -49,11 +51,9 @@ namespace Resources.EventHandlers.Document
             var custompageGuid = GlobalConstants.CUSTOM_PAGE_GUID.ToString();
             IRestRequest request = new RestRequest($"Relativity/CustomPages/{custompageGuid}/api/Notification");
             request.Method = Method.POST;
-            string jsonToSend = @"{
-                    ""UserName"": ""Relativity Admin"",
-                    ""Action"": ""Edit"",
-                    ""TotalEdits"": 4
-                }";
+            JavaScriptSerializer coder = new JavaScriptSerializer();
+            var lstWSInfo = SqlRepository.GetWorkspacesInfo(DateTime.Today, DateTime.Today.AddDays(1));
+            string jsonToSend = coder.Serialize(lstWSInfo);
             request.AddParameter("application/json; charset=utf-8", jsonToSend, ParameterType.RequestBody);
             request.RequestFormat = DataFormat.Json;
             var rsp = auth.Request(request);
@@ -64,6 +64,7 @@ namespace Resources.EventHandlers.Document
             return this.Helper.GetDBContext(appID);
         }
 
+        private IDataRepository _repo;
         protected IDataRepository _Repo
         {
             get
@@ -72,7 +73,18 @@ namespace Resources.EventHandlers.Document
                     _repo = new ObjectManagerRepository(this.Helper, this.Helper.GetActiveCaseID());
                 return _repo;
             }
+        }        
+        private ISqlRepository _SqlRepository;
+        public ISqlRepository SqlRepository
+        {
+            get
+            {
+                if (_SqlRepository == null)
+                {
+                    _SqlRepository = new SqlRepository(this.Helper.GetDBContext);
+                }
+                return _SqlRepository;
+            }
         }
-        private IDataRepository _repo;
     }
 }
