@@ -7,6 +7,6 @@ namespace Resources.Models
         public int WorkspaceArtifactId { get; set; }
         public string WorkspaceName { get; set; }
         public List<User> User { get; set; }
-
+        public decimal budgetProgress { get; set; }
     }
 }

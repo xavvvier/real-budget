@@ -34,9 +34,11 @@ namespace Resources.Repositories.Sql
         {
             var infoList = new List<WorkspaceInfo>();
             var workspacesWithApp = WorkspacesWithAppInstalled();
+            var budgetProgress = GetTotalInstance();
             foreach (var workspace in workspacesWithApp)
             {
                 WorkspaceInfo workspaceInfo = ReadWorkspaceInfo(workspace, start, end);
+                workspaceInfo.budgetProgress = budgetProgress;
                 infoList.Add(workspaceInfo);
             }
             return infoList;
