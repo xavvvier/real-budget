@@ -70,12 +70,12 @@
       <Private>True</Private>
     </Reference>
     <Reference Include="NSerio.Relativity.WebAuthentication.Core, Version=0.4.0.2, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\NSerio.Relativity.WebAuthentication.0.4.0.2\lib\net451\NSerio.Relativity.WebAuthentication.Core.dll</HintPath>
-      <Private>True</Private>
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Solution Resources\NSerio.Relativity.WebAuthentication.Core.dll</HintPath>
     </Reference>
     <Reference Include="NSerio.Relativity.WebAuthentication.Entities, Version=0.4.0.2, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\NSerio.Relativity.WebAuthentication.0.4.0.2\lib\net451\NSerio.Relativity.WebAuthentication.Entities.dll</HintPath>
-      <Private>True</Private>
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Solution Resources\NSerio.Relativity.WebAuthentication.Entities.dll</HintPath>
     </Reference>
     <Reference Include="Relativity.API, Version=9.6.25.48, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\Relativity.API.9.6.25.48\lib\net462\Relativity.API.dll</HintPath>

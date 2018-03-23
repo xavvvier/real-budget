@@ -23,10 +23,17 @@ DECLARE @SQL NVARCHAR(MAX) = N'
 	from CTE 
 	where ArtifactGuid = ''5D94419E-B513-422E-BEED-E5881747D5E1''
 	GRoup by [User]
+), CTE_AVERAGE AS
+(
+	select [User], AVG(Seconds) AS Average
+	from CTE 
+	WHERE CTE.Seconds > 0
+	GROUP BY [USER]
 )
-SELECT UA.UserID, UA.FullName as UserName, V.Views, V.DistinctViews, ISNULL(E.Edits, 0) as Edits, ISNULL(E.DistinctEdits, 0) as DistinctEdits, ISNULL(Seconds, 0) as Seconds
+SELECT UA.UserID, UA.FullName as UserName, V.Views, V.DistinctViews, ISNULL(E.Edits, 0) as Edits, ISNULL(E.DistinctEdits, 0) as DistinctEdits, ISNULL(Seconds, 0) as Seconds, ISNULL(Average, 0) as Average
 FROM CTE_VIEWS V
 LEFT JOIN CTE_EDITS E ON V.[User] = E.[User]
+LEFT JOIN CTE_AVERAGE A ON V.[User] = A.[User]
 JOIN EDDSDBO.AuditUser UA ON V.[User] = UA.UserID
 '
 
